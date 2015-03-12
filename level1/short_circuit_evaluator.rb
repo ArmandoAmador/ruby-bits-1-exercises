@@ -13,6 +13,5 @@
 # end
 
 def search_index(games, search_term)
-  search_index = games.find_index(search_term)
-  search_index || "Not Found"
+  games.find_index(search_term) || "Not Found"
 end
