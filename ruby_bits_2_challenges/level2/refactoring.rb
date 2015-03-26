@@ -5,18 +5,30 @@
 # duplicating code. Hint: You'll need to use send inside of
 # define_method to call methods on the games array.
 
+# class Library
+#   attr_accessor :games
+
+#   def each(&block)
+#     games.each(&block)
+#   end
+
+#   def map(&block)
+#     games.map(&block)
+#   end
+
+#   def select(&block)
+#     games.select(&block)
+#   end
+# end
+
 class Library
   attr_accessor :games
 
-  def each(&block)
-    games.each(&block)
-  end
+  METHODS = [:each, :map, :select]
 
-  def map(&block)
-    games.map(&block)
-  end
-
-  def select(&block)
-    games.select(&block)
+  METHODS.each do |method|
+    define_method method do |&block|
+      games.send(method, &block)
+    end
   end
 end
